@@ -1,0 +1,35 @@
+int decimal string hexdecimal octal bool var
+bold italic underscore
+hotmail  gmail
+com  net org  edu  gob  mil  es
+http  https  www
+<= >= ==  < >  !=
+&&    ||    !   ^^  ~
+++   --
+if
+for  foreach  while
+cout  write  writeline
+push  pop  peek
+lenght  tail  head  stack
+thread threadstop
++ - *  /
+public private  static  protected
+protected
+void
+Mesh  Grid  MeshGrid             
+/*  */  //
+collections
+math
+abs  asin  asinh  acos  acosh  atan 
+Sound
+
+true   false   null  nullptr
+regex
+byte  char  decimal  float  int  double  long   sbyte  string  ulong  uint  intenger  bool boolean
+<<  >>
+random  rand   srand
+conts  constscast  constanst
+sizeof   typeof  typedef  as is
+list   vector   register   stack    queue
+{ } ( ) [ ]
+
