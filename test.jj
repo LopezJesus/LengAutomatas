@@ -60,85 +60,85 @@ TOKEN:
     | <IMPRIMIR: "cout"| "write" | "writeline">
     {System.out.println("Imprimir: "+image);}
 
-    |  <PILAS: "push" | "pop" | "peek">
+    | <PILAS: "push" | "pop" | "peek">
     {System.out.println("Pilas: "+image);}
 
-    |  <COLAS: "lenght" | "tail" | "head" >
+    | <COLAS: "lenght" | "tail" | "head" >
     {System.out.println("Colas: "+image);}
 
-    |  <HILO: "thread" | "threadstop">
+    | <HILO: "thread" | "threadstop">
     {System.out.println("Hilo: "+image);}
 
-    |  <OPERADORES: "+" | "-" | "*" | "/" >
+    | <OPERADORES: "+" | "-" | "*" | "/" >
     {System.out.println("Operadores: "+image);}
 
-    |  <TIPOMETODO: "public" | "private"  | "static" | "protected">
+    | <TIPOMETODO: "public" | "private"  | "static" | "protected">
     {System.out.println("Pilas: "+image);}
 
-    |  <MODIFICADORES: "protected" >
+    | <MODIFICADORES: "protected" >
     {System.out.println("Modificadores: "+image);}
 
-    |  <PROCEDIMIENTO: "void" >
+    | <PROCEDIMIENTO: "void" >
     {System.out.println("Procedimientos: "+image);}
 
-    |  <TIPOGRAFICACION: "Mesh" | "Grid" | "MeshGrid"  >
+    | <TIPOGRAFICACION: "Mesh" | "Grid" | "MeshGrid"  >
     {System.out.println("Procedimientos: "+image);}
 
-    |  <COMENTARIO: "/*" | "*/" | "//" >
+    | <COMENTARIO: "/*" | "*/" | "//" >
     {System.out.println("Comentario: "+image);}
 
-    |  <MAT_FUNCIONES: "abs" | "asin" | "asinh" | "acos" | "acosh" | "atan">
+    | <MAT_FUNCIONES: "abs" | "asin" | "asinh" | "acos" | "acosh" | "atan">
     {System.out.println("Funciones matematicas: "+image);}
 
-    |  <OBSOUND: "Sound" >
+    | <OBSOUND: "Sound" >
     {System.out.println("Sonido: "+image);}
 
-    |  <CONDITION: "true" | "false" | "null" | "nullptr" >
+    | <CONDITION: "true" | "false" | "null" | "nullptr" >
     {System.out.println("Condicion: "+image);}
 
-    |  <EXPREG: "regex" >
+    | <EXPREG: "regex" >
     {System.out.println("Expresion regular: "+image);}
 
-    |  <TYPEVARIBLE: "byte" | "char" | "decimal" | "float" | "int" | "double" | "long" | "sbyte" | "string" | "ulong" | "uint" | "intenger" | "bool" | "boolean" >
+    | <TYPEVARIBLE: "byte" | "char" | "decimal" | "float" | "int" | "double" | "long" | "sbyte" | "string" | "ulong" | "uint" | "intenger" | "bool" | "boolean" >
     {System.out.println("Tipo de variable: "+image);}
 
-    |  <COLECCIONES: "collections" >
+    | <COLECCIONES: "collections" >
     {System.out.println("Colecciones: "+image);}
 
-    |  <MATEMATICAS: "math" >
+    | <MATEMATICAS: "math" >
     {System.out.println("Matematicas: "+image);}
 
-    |  <RECORRIDA: "<<"|">>" >
+    | <RECORRIDA: "<<"|">>" >
     {System.out.println("Recorrida: "+image);}
 
-    |  <ALEATORIO: "random" | "rand" | "srand" >
+    | <ALEATORIO: "random" | "rand" | "srand" >
     {System.out.println("Recorrida: "+image);}
 
-    |  <CONSTANTES: "conts" | "constscast" | "constanst" >
+    | <CONSTANTES: "conts" | "constscast" | "constanst" >
     {System.out.println("Constantes: "+image);}
 
-    |  <INFO_OBJ: "sizeof" | "typeof" | "typedef" | "as" | "is" >
+    | <INFO_OBJ: "sizeof" | "typeof" | "typedef" | "as" | "is" >
     {System.out.println("Información objeto: "+image);}
 
-    |  <ESTRUCTDATOS: "list" | "vector" | "register" | "stack" | "queue" >
+    | <ESTRUCTDATOS: "list" | "vector" | "register" | "stack" | "queue" >
     {System.out.println("Recorrida: "+image);}
 
-    |  <LLAVEIZQ: "{" >
+    | <LLAVEIZQ: "{" >
     {System.out.println("Llave izquierda: "+image);}
 
-    |  <LLAVEDER: "}" >
+    | <LLAVEDER: "}" >
     {System.out.println("Llave derecha: "+image);}
 
-    |  <PARENTESISIZQ: "(" >
+    | <PARENTESISIZQ: "(" >
     {System.out.println("Paréntesis izquierdo: "+image);}
 
-    |  <PARENTESISDER: ")" >
+    | <PARENTESISDER: ")" >
     {System.out.println("Paréntesis derecho: "+image);}
 
-    |  <CORCHETEIZQ: "[" >
+    | <CORCHETEIZQ: "[" >
     {System.out.println("Corchete izquierdo: "+image);}
 
-    |  <CORCHETEDER : "]" >
+    | <CORCHETEDER : "]" >
     {System.out.println("Corchete derecho: "+image);}
 
 
