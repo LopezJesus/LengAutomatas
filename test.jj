@@ -111,6 +111,35 @@ TOKEN:
     |  <RECORRIDA: "<<"|">>" >
     {System.out.println("Recorrida: "+image);}
 
+    |  <ALEATORIO: "random" | "rand" | "srand" >
+    {System.out.println("Recorrida: "+image);}
+
+    |  <CONSTANTES: "conts" | "constscast" | "constanst" >
+    {System.out.println("Constantes: "+image);}
+
+    |  <INFO_OBJ: "sizeof" | "typeof" | "typedef" | "as" | "is" >
+    {System.out.println("Información objeto: "+image);}
+
+    |  <ESTRUCTDATOS: "list" | "vector" | "register" | "stack" | "queue" >
+    {System.out.println("Recorrida: "+image);}
+
+    |  <LLAVEIZQ: "{" >
+    {System.out.println("Llave izquierda: "+image);}
+
+    |  <LLAVEDER: "}" >
+    {System.out.println("Llave derecha: "+image);}
+
+    |  <PARENTESISIZQ: "(" >
+    {System.out.println("Paréntesis izquierdo: "+image);}
+
+    |  <PARENTESISDER: ")" >
+    {System.out.println("Paréntesis derecho: "+image);}
+
+    |  <CORCHETEIZQ: "[" >
+    {System.out.println("Corchete izquierdo: "+image);}
+
+    |  <CORCHETEDER : "]" >
+    {System.out.println("Corchete derecho: "+image);}
 
 
 }
@@ -146,7 +175,15 @@ void Iniciar() :
     |<COLECCIONES>
     |<MATEMATICAS>
     |<RECORRIDA>
-    |<MATEMATICAS>
-    |<MATEMATICAS>)+
+    |<ALEATORIO>
+    |<CONSTANTES>
+    |<INFO_OBJ>
+    |<ESTRUCTDATOS>
+    |<LLAVEIZQ>
+    |<LLAVEDER>
+    |<PARENTESISIZQ>
+    |<PARENTESISDER>
+    |<CORCHETEIZQ>
+    |<CORCHETEDER>)+
     <EOF>
 }
