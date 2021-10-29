@@ -105,9 +105,6 @@ TOKEN:
     |  <COLECCIONES: "collections" >
     {System.out.println("Colecciones: "+image);}
 
-    |  <FINCICLOS: "endfor" | "endforeach" | "endif" | "endswich" | "endwhile" >
-    {System.out.println("Fin de ciclos: "+image);}
-
     |  <MATEMATICAS: "math" >
     {System.out.println("Matematicas: "+image);}
 
@@ -147,7 +144,6 @@ void Iniciar() :
     |<EXPREG>
     |<TYPEVARIBLE>
     |<COLECCIONES>
-    |<FINCICLOS>
     |<MATEMATICAS>
     |<RECORRIDA>
     |<MATEMATICAS>
