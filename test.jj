@@ -33,7 +33,7 @@ TOKEN:
     | <HTML_LETRA: "bold"|"italic"|"underscore"|"small"|"del"|"mark"|"strong"|"em"|"i"|"ins"|"sub"|"sup">
     {System.out.println("HTML tipografia: "+image);}
 
-    | <HTML_QuotCita: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
+    | <HTML_QUOTCITA: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
     {System.out.println("HTML cita: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
@@ -152,6 +152,7 @@ void Iniciar() :
 {
     (<TIPODATO> 
     |<HTML_LETRA>
+    |<HTML_QUOTCITA>
     |<ORGANIZACION> 
     |<DOMINIO>
     |<PROTOCOLO>
