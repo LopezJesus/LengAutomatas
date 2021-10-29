@@ -30,8 +30,11 @@ TOKEN:
     <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
     {System.out.println("Tipo de dato: "+image);}
     
-    | <HTML_LETRA: "bold"|"italic"|"underscore">
+    | <HTML_LETRA: "bold"|"italic"|"underscore"|"small"|"del"|"mark"|"strong"|"em"|"i"|"ins"|"sub"|"sup">
     {System.out.println("HTML tipografia: "+image);}
+
+    | <HTML_QuotCita: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
+    {System.out.println("HTML cita: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
     {System.out.println("Organizacion: "+image);}
