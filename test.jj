@@ -1,0 +1,156 @@
+PARSER_BEGIN(test)
+class test
+{
+    public static void main ( String[] args) throws ParseException
+    {
+        try
+        {
+            test a = new test (System.in) ; 
+            a.Iniciar();
+            System.out.println("La cadena fue aceptada correctamente");
+        }
+        catch(ParseException e)
+        {
+            System.out.println("Hubo un error ");
+        }
+    }
+}
+PARSER_END(test)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN:
+{
+    <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
+    {System.out.println("Tipo de dato: "+image);}
+    
+    | <HTML_LETRA: "bold"|"italic"|"underscore">
+    {System.out.println("HTML tipografia: "+image);}
+
+    | <ORGANIZACION: "hotmail" | "gmail" >
+    {System.out.println("Organizacion: "+image);}
+
+    | <DOMINIO: "com" | "net" | "org" | "edu" | "gob" | "mil" | "es">
+    {System.out.println("Dominio: "+image);}
+
+    | <PROTOCOLO: "http" | "https" | "www" >
+    {System.out.println("Protocolo: "+image);}
+
+    | <OPLOGICO: "<=" | ">=" | "==" | "<" | ">"| "!=" >
+    {System.out.println("Operador logico: "+image);}
+
+    | <OPRELA: "&&" | "||" | "!" | "^^" | "~" >
+    {System.out.println("Operador relacional: "+image);}
+
+    | <ADICIONSUSTRACCION: "++" | "--" >
+    {System.out.println("Adicion/sustraccion: "+image);}
+
+    | <PREGUNTA: "if" >
+    {System.out.println("Adicion/sustraccion: "+image);}
+
+    | <CICLOS: "for" | "foreach" | "while">
+    {System.out.println("Ciclos: "+image);}
+
+    | <IMPRIMIR: "cout"| "write" | "writeline">
+    {System.out.println("Imprimir: "+image);}
+
+    |  <PILAS: "push" | "pop" | "peek">
+    {System.out.println("Pilas: "+image);}
+
+    |  <COLAS: "lenght" | "tail" | "head" >
+    {System.out.println("Colas: "+image);}
+
+    |  <HILO: "thread" | "threadstop">
+    {System.out.println("Hilo: "+image);}
+
+    |  <OPERADORES: "+" | "-" | "*" | "/" >
+    {System.out.println("Operadores: "+image);}
+
+    |  <TIPOMETODO: "public" | "private"  | "static" | "protected">
+    {System.out.println("Pilas: "+image);}
+
+    |  <MODIFICADORES: "protected" >
+    {System.out.println("Modificadores: "+image);}
+
+    |  <PROCEDIMIENTO: "void" >
+    {System.out.println("Procedimientos: "+image);}
+
+    |  <TIPOGRAFICACION: "Mesh" | "Grid" | "MeshGrid"  >
+    {System.out.println("Procedimientos: "+image);}
+
+    |  <COMENTARIO: "/*" | "*/" | "//" >
+    {System.out.println("Comentario: "+image);}
+
+    |  <MAT_FUNCIONES: "abs" | "asin" | "asinh" | "acos" | "acosh" | "atan">
+    {System.out.println("Funciones matematicas: "+image);}
+
+    |  <OBSOUND: "Sound" >
+    {System.out.println("Sonido: "+image);}
+
+    |  <CONDITION: "true" | "false" | "null" | "nullptr" >
+    {System.out.println("Condicion: "+image);}
+
+    |  <EXPREG: "regex" >
+    {System.out.println("Expresion regular: "+image);}
+
+    |  <TYPEVARIBLE: "byte" | "char" | "decimal" | "float" | "int" | "double" | "long" | "sbyte" | "string" | "ulong" | "uint" | "intenger" | "bool" | "boolean" >
+    {System.out.println("Tipo de variable: "+image);}
+
+    |  <COLECCIONES: "collections" >
+    {System.out.println("Colecciones: "+image);}
+
+    |  <FINCICLOS: "endfor" | "endforeach" | "endif" | "endswich" | "endwhile" >
+    {System.out.println("Fin de ciclos: "+image);}
+
+    |  <MATEMATICAS: "math" >
+    {System.out.println("Matematicas: "+image);}
+
+    |  <RECORRIDA: "<<"|">>" >
+    {System.out.println("Recorrida: "+image);}
+
+
+
+}
+
+void Iniciar() :
+{}
+{
+    (<TIPODATO> 
+    |<HTML_LETRA>
+    |<ORGANIZACION> 
+    |<DOMINIO>
+    |<PROTOCOLO>
+    |<OPLOGICO>
+    |<OPRELA>
+    |<ADICIONSUSTRACCION>
+    |<PREGUNTA>
+    |<CICLOS>
+    |<IMPRIMIR>
+    |<PILAS>
+    |<COLAS>
+    |<HILO>
+    |<OPERADORES>
+    |<TIPOMETODO> 
+    |<MODIFICADORES>
+    |<PROCEDIMIENTO>
+    |<TIPOGRAFICACION>
+    |<COMENTARIO>
+    |<MAT_FUNCIONES>
+    |<OBSOUND>
+    |<CONDITION>
+    |<EXPREG>
+    |<TYPEVARIBLE>
+    |<COLECCIONES>
+    |<FINCICLOS>
+    |<MATEMATICAS>
+    |<RECORRIDA>
+    |<MATEMATICAS>
+    |<MATEMATICAS>)+
+    <EOF>
+}
