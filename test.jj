@@ -237,6 +237,12 @@ TOKEN:
 
     | <MODOARCHIVO : "fileMode" >
     {System.out.println("ModoArhcivo");}
+    
+    | <BIFURCACION : "switch" >
+    {System.out.println("Bifurcacion");}
+    
+    | <FIN_BIFURCACION : "endswith" >
+    {System.out.println("Fin Bifurcacion");}
 
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 }
@@ -316,6 +322,8 @@ void Iniciar() :
     |<ELIMINARARCHIVOS>
     |<NOMBREARCHIVO>
     |<MODOARCHIVO>
+    |<BIFURCACION> 
+    |<FIN_BIFURCACION> 
     |(t = <IDENTIFICADOR>
    {
 int contador = 0;
