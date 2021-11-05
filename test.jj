@@ -28,8 +28,7 @@ SKIP :
 TOKEN :
 {
     <#DIGITO:(["0"-"9"])+>
-    | <#LETRA:["a"-"z","A"-"Z"]>
-    | <#GUIONB:"_">
+    | <#DECIMAL: <DIGITO>(".")?(<DIGITO>)?>
 }
 
 TOKEN:
@@ -45,6 +44,15 @@ TOKEN:
 
     | <NAMESPACE: "namespace">
     {System.out.println("Namespace");}
+
+    | <IGUAL: "=">
+    {System.out.println("Igual");}
+
+    | <NUMERO:("+"|"-")?(<DECIMAL>)+>
+    {System.out.println("NUMERO: "+image);}
+
+    | <CLASE: "class">
+    {System.out.println("Clase");}
 
     | <HTML_LETRA: "bold"|"italic"|"underscore"|"small"|"del"|"mark"|"strong"|"em"|"i"|"ins"|"sub"|"sup">
     {System.out.println("HTMLtipografia: "+image);}
@@ -140,7 +148,7 @@ TOKEN:
     {System.out.println("Condicion: "+image);}
 
     | <EXPREG: "regex" >
-    {System.out.println("Exreg";}
+    {System.out.println("Expreg");}
 
     | <TYPEVARIBLE: "byte" | "char" | "decimal" | "float" | "int" | "double" | "long" | "sbyte" | "string" | "ulong" | "uint" | "intenger" | "bool" | "boolean" >
     {System.out.println("Tipo de variable: "+image);}
@@ -184,7 +192,7 @@ TOKEN:
     | <CORCHETEDER : "]" >
     {System.out.println("corcheteder");}
 
-    | <IDENTIFICADOR:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
+    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
     {System.out.println("IDENTIFICADOR: "+image);}
 
 
@@ -197,6 +205,9 @@ void Iniciar() :
     |<PUNTOYCOMA>
     |<USANDO>
     |<NAMESPACE>
+    |<IGUAL>
+    |<NUMERO>
+    |<CLASE>
     |<HTML_LETRA>
     |<HTML_INTRO>
     |<HTML_STYLES>
