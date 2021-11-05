@@ -1,1 +1,2 @@
 # LengAutomatas
+Lexico
