@@ -36,7 +36,7 @@ TOKEN:
     | <HTML_INTRO: "!DOCTYPE"|"html"|"head"|"title"|"body"|"h1"|"p">
     {System.out.println("HTML intro: "+image);}
             
-    | <HTML_STYLES: "style"|"background-color"|"color"|"font-family"|"font-family"|"text-align">
+    | <HTML_STYLES: "style"|"background-color"|"color"|"font-family"|"font-size"|"text-align">
     {System.out.println("HTML estilos: "+image);}
     
     | <HTML_QUOTCITA: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
