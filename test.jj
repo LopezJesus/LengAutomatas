@@ -105,6 +105,9 @@ TOKEN:
 
     | <PREGUNTA: "if" >
     {System.out.println("Pregunta");}
+    
+    | <FIN_PREGUNTA: "endif " >
+    {System.out.println("Fin_Pregunta");}
 
     | <CICLOS: "for" | "foreach" | "while">
     {System.out.println("Ciclos: "+image);}
@@ -252,6 +255,7 @@ void Iniciar() :
     |<OPRELA>
     |<ADICIONSUSTRACCION>
     |<PREGUNTA>
+    |<FIN_PREGUNTA>
     |<CICLOS>
     |<FIN_CICLOS>
     |<IMPRIMIR>
