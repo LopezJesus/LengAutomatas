@@ -79,10 +79,10 @@ TOKEN:
     {System.out.println("HTML_table: "+image);}
     
     | <HTML_LINK: "href"|"target"|"mailto">
-    {System.out.println("HTML_hsl: "+image);}
+    {System.out.println("HTML_link: "+image);}
    
     | <HTML_LINK_ATTRIBUTE: "_self"|"_blank"|"_parent"|"_top">
-    {System.out.println("HTML_hsl: "+image);}
+    {System.out.println("HTML_link_atribute: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
     {System.out.println("Organizacion: "+image);}
