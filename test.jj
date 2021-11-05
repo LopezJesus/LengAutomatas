@@ -107,6 +107,9 @@ TOKEN:
 
     | <CICLOS: "for" | "foreach" | "while">
     {System.out.println("Ciclos: "+image);}
+    
+    | <FIN_CICLOS: "endfor" | "endforeach" | "endwhile">
+    {System.out.println("Ciclos: "+image);}
 
     | <IMPRIMIR: "cout"| "write" | "writeline">
     {System.out.println("Imprimir: "+image);}
@@ -226,6 +229,7 @@ void Iniciar() :
     |<ADICIONSUSTRACCION>
     |<PREGUNTA>
     |<CICLOS>
+    |<FIN_CICLOS>
     |<IMPRIMIR>
     |<PILAS>
     |<COLAS>
