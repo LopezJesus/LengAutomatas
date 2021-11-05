@@ -41,6 +41,12 @@ TOKEN:
     
     | <HTML_QUOTCITA: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
     {System.out.println("HTML cita: "+image);}
+    
+    | <HTML_RGB: "rgb">
+    {System.out.println("HTML rgb: "+image);}
+    
+    | <HTML_HSL: "hsl">
+    {System.out.println("HTML rgb: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
     {System.out.println("Organizacion: "+image);}
@@ -161,6 +167,8 @@ void Iniciar() :
     |<HTML_INTRO>
     |<HTML_STYLES>
     |<HTML_QUOTCITA>
+    |<HTML_RGB>
+    |<HTML_HSL>
     |<ORGANIZACION> 
     |<DOMINIO>
     |<PROTOCOLO>
