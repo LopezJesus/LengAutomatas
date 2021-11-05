@@ -111,7 +111,7 @@ TOKEN:
 
     | <FIN_CICLOS: "endfor" | "endforeach" | "endwhile">
     {System.out.println("Ciclos: "+image);}
-    
+
     | <IMPRIMIR: "cout"| "write" | "writeline">
     {System.out.println("Imprimir: "+image);}
 
@@ -196,6 +196,28 @@ TOKEN:
     | <CORCHETEDER : "]" >
     {System.out.println("corcheteder");}
 
+    | <DEFINICIONSQL : "create" | "drop " | "alter" | "truncate">
+    {System.out.println("DefinicionSQL: "+image);}
+
+    | <MANIPULARSQL : "select" | "insert" | "update" | "delete" >
+    {System.out.println("ManipularSQL: "+image);}
+
+    | <CLAUSULASSQL : "from" | "group_by" | "having" | "order_by" | "where" >
+    {System.out.println("ClausulasSQL: "+image);}
+
+    | <AGREGADOSQL : "avg" | "count" | "sum" | "max" | "min" >
+    {System.out.println("AgregadoSQL: "+image);}
+
+    | <JUNTARSQL : "join" | "leftjoin" | "rightjoin"  >
+    {System.out.println("JuntarSQL: "+image);}
+
+    | <COMBINARSQL : "union" | "unionall" >
+    {System.out.println("CombinarSQL: "+image);}
+
+    | <VISITASSQL : "views" >
+    {System.out.println("VistaasSQL: "+image);}
+
+
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 }
 
@@ -260,6 +282,13 @@ void Iniciar() :
     |<PARENTESISDER>
     |<CORCHETEIZQ>
     |<CORCHETEDER>
+    |<DEFINICIONSQL>
+    |<MANIPULARSQL>
+    |<CLAUSULASSQL>
+    |<AGREGADOSQL>
+    |<JUNTARSQL>
+    |<COMBINARSQL>
+    |<VISITASSQL>
     |(t = <IDENTIFICADOR>
    {
 int contador = 0;
