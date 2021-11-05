@@ -32,6 +32,9 @@ TOKEN:
     
     | <HTML_LETRA: "bold"|"italic"|"underscore"|"small"|"del"|"mark"|"strong"|"em"|"i"|"ins"|"sub"|"sup">
     {System.out.println("HTML tipografia: "+image);}
+        
+    | <HTML_INTRO: "!DOCTYPE"|"html"|"head"|"title"|"body"|"h1"|"p">
+    {System.out.println("HTML tipografia: "+image);}
 
     | <HTML_QUOTCITA: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
     {System.out.println("HTML cita: "+image);}
@@ -152,6 +155,7 @@ void Iniciar() :
 {
     (<TIPODATO> 
     |<HTML_LETRA>
+    |<HTML_INTRO>
     |<HTML_QUOTCITA>
     |<ORGANIZACION> 
     |<DOMINIO>
