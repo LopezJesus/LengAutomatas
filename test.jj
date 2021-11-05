@@ -147,8 +147,8 @@ TOKEN:
     {System.out.println("usando");}
 
     
-    | <VARIABLE:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
-    {System.out.println("VARIABLE: "+image);}
+    | <IDENTIFICADOR:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
+    {System.out.println("identificador: "+image);}
 
 
 }
@@ -204,6 +204,6 @@ void Iniciar() :
     |<CORCHETEIZQ>
     |<CORCHETEDER>
     |<USANDO>
-    |<VARIABLE>)+
+    |<IDENTIFICADOR>)+
     <EOF>
 }
