@@ -25,6 +25,13 @@ SKIP :
 | "\n"
 }
 
+TOKEN :
+{
+    <#DIGITO:(["0"-"9"])+>
+    | <#LETRA:["a"-"z","A"-"Z"]>
+    | <#GUIONB:"">
+}
+
 TOKEN:
 {
     <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
@@ -161,6 +168,9 @@ TOKEN:
 
     | <CORCHETEDER : "]" >
     {System.out.println("Corchete derecho: "+image);}
+    
+    | <VARIABLE:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
+    {System.out.println("VARIABLE: "+image);}
 
 
 }
