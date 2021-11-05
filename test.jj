@@ -26,11 +26,11 @@ SKIP :
 }
 
 TOKEN :
-{
+    {
     <#DIGITO:(["0"-"9"])+>
-    | <#LETRA:["a"-"z","A"-"Z"]>
-    | <#GUIONB:"_">
-}
+    | <#DECIMAL: <DIGITO>(".")?(<DIGITO>)?>
+    }
+
 
 TOKEN:
 {
@@ -39,6 +39,15 @@ TOKEN:
     
     | <PUNTOYCOMA: ";">
     {System.out.println("puntoycoma");}
+
+    | <NUMERO:("+"|"-")?(<DECIMAL>)+>
+    {System.out.println("NUMERO: "+image);}
+
+    | <PUNTO: ".">
+    {System.out.println("punto");}
+
+    | <IGUAL: "=">
+    {System.out.println("igual");}
 
     | <USANDO : "using" >
     {System.out.println("usando");}
@@ -178,9 +187,8 @@ TOKEN:
     | <CORCHETEDER : "]" >
     {System.out.println("corcheteder");}
 
-    | <IDENTIFICADOR:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
+    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>    
     {System.out.println("IDENTIFICADOR: "+image);}
-
 
 }
 
@@ -189,6 +197,9 @@ void Iniciar() :
 {
     (<TIPODATO> 
     |<PUNTOYCOMA>
+    |<NUMERO>
+    |<PUNTO>
+    |<IGUAL>
     |<USANDO>
     |<NAMESPACE>
     |<HTML_LETRA>
