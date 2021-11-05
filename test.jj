@@ -243,6 +243,9 @@ TOKEN:
     
     | <FIN_BIFURCACION : "endswith" >
     {System.out.println("Fin Bifurcacion");}
+    
+    | <CON_EXCEPCIONES : "throw"|"try-catch"|"try-finally"|"try-catch-finally">
+    {System.out.println("Fin Bifurcacion");}
 
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 }
@@ -324,6 +327,7 @@ void Iniciar() :
     |<MODOARCHIVO>
     |<BIFURCACION> 
     |<FIN_BIFURCACION> 
+    |<CON_EXCEPCIONES>
     |(t = <IDENTIFICADOR>
    {
 int contador = 0;
