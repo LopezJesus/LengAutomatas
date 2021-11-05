@@ -46,7 +46,7 @@ TOKEN:
     {System.out.println("HTML rgb: "+image);}
     
     | <HTML_HSL: "hsl">
-    {System.out.println("HTML rgb: "+image);}
+    {System.out.println("HTML hsl: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
     {System.out.println("Organizacion: "+image);}
