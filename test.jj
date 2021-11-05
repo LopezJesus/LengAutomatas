@@ -47,6 +47,12 @@ TOKEN:
     
     | <HTML_HSL: "hsl">
     {System.out.println("HTML hsl: "+image);}
+    
+    | <HTML_IMAGE: "img"|"map"|"area"|"picture">
+    {System.out.println("HTML hsl: "+image);}
+    
+    | <HTML_TABLE: "table"|"th"|"tr"|"caption"|"colgroup"|"col"|"thead"|"tbody"|"tfoot">
+    {System.out.println("HTML hsl: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
     {System.out.println("Organizacion: "+image);}
@@ -169,6 +175,8 @@ void Iniciar() :
     |<HTML_QUOTCITA>
     |<HTML_RGB>
     |<HTML_HSL>
+    |<HTML_IMAGE>
+    |<HTML_TABLE>
     |<ORGANIZACION> 
     |<DOMINIO>
     |<PROTOCOLO>
