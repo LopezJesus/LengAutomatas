@@ -1,59 +1,33 @@
-PARSER_BEGIN(test)
-class test
-{
-    public static void main ( String[] args) throws ParseException
-    {
-        try
-        {
-            test a = new test (System.in) ; 
-            a.Iniciar();
-            System.out.println("La cadena fue aceptada correctamente");
-        }
-        catch(ParseException e)
-        {
-            System.out.println("Hubo un error ");
-        }
-    }
-}
-PARSER_END(test)
 
-SKIP :
-{
-  " "
-| "\r"
-| "\t"
-| "\n"
-}
-
-TOKEN :
-{
-    <#DIGITO:(["0"-"9"])+>
-    | <#LETRA:["a"-"z","A"-"Z"]>
-    | <#GUIONB:"">
-}
 
 TOKEN:
 {
     <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
-    {System.out.println("Tipo de dato: "+image);}
+    {System.out.println("Tipodato: "+image);}
     
+    | <PUNTOYCOMA: ";">
+    {System.out.println("puntoycoma");}
+
+    | <NAMESPACE: "namespace">
+    {System.out.println("namespace");}
+
     | <HTML_LETRA: "bold"|"italic"|"underscore"|"small"|"del"|"mark"|"strong"|"em"|"i"|"ins"|"sub"|"sup">
-    {System.out.println("HTML tipografia: "+image);}
+    {System.out.println("HTMLtipografia: "+image);}
         
     | <HTML_INTRO: "!DOCTYPE"|"html"|"head"|"title"|"body"|"h1"|"p">
-    {System.out.println("HTML intro: "+image);}
+    {System.out.println("HTMLintro: "+image);}
             
     | <HTML_STYLES: "style"|"background-color"|"color"|"font-family"|"font-size"|"text-align">
-    {System.out.println("HTML estilos: "+image);}
+    {System.out.println("HTMLestilos: "+image);}
     
     | <HTML_QUOTCITA: "abbr"|"address"|"bdo"|"blockquote"|"cite"|"q">
-    {System.out.println("HTML cita: "+image);}
+    {System.out.println("HTMLcita: "+image);}
     
     | <HTML_RGB: "rgb">
-    {System.out.println("HTML rgb: "+image);}
+    {System.out.println("HTML_rgb");}
     
     | <HTML_HSL: "hsl">
-    {System.out.println("HTML hsl: "+image);}
+    {System.out.println("HTML_hsl");}
     
     | <HTML_IMAGE: "img"|"map"|"area"|"picture">
     {System.out.println("HTML hsl: "+image);}
@@ -80,7 +54,7 @@ TOKEN:
     {System.out.println("Adicion/sustraccion: "+image);}
 
     | <PREGUNTA: "if" >
-    {System.out.println("Adicion/sustraccion: "+image);}
+    {System.out.println("Pregunta");}
 
     | <CICLOS: "for" | "foreach" | "while">
     {System.out.println("Ciclos: "+image);}
@@ -107,7 +81,7 @@ TOKEN:
     {System.out.println("Modificadores: "+image);}
 
     | <PROCEDIMIENTO: "void" >
-    {System.out.println("Procedimientos: "+image);}
+    {System.out.println("Procedimiento");}
 
     | <TIPOGRAFICACION: "Mesh" | "Grid" | "MeshGrid"  >
     {System.out.println("Procedimientos: "+image);}
@@ -119,7 +93,7 @@ TOKEN:
     {System.out.println("Funciones matematicas: "+image);}
 
     | <OBSOUND: "Sound" >
-    {System.out.println("Sonido: "+image);}
+    {System.out.println("obsound");}
 
     | <CONDITION: "true" | "false" | "null" | "nullptr" >
     {System.out.println("Condicion: "+image);}
@@ -140,7 +114,7 @@ TOKEN:
     {System.out.println("Recorrida: "+image);}
 
     | <ALEATORIO: "random" | "rand" | "srand" >
-    {System.out.println("Recorrida: "+image);}
+    {System.out.println("Aleatorio: "+image);}
 
     | <CONSTANTES: "conts" | "constscast" | "constanst" >
     {System.out.println("Constantes: "+image);}
@@ -152,22 +126,26 @@ TOKEN:
     {System.out.println("Recorrida: "+image);}
 
     | <LLAVEIZQ: "{" >
-    {System.out.println("Llave izquierda: "+image);}
+    {System.out.println("llaveizq");}
 
     | <LLAVEDER: "}" >
-    {System.out.println("Llave derecha: "+image);}
+    {System.out.println("llaveder");}
 
     | <PARENTESISIZQ: "(" >
-    {System.out.println("Paréntesis izquierdo: "+image);}
+    {System.out.println("parentesisizq ");}
 
     | <PARENTESISDER: ")" >
-    {System.out.println("Paréntesis derecho: "+image);}
+    {System.out.println("parentesisder ");}
 
     | <CORCHETEIZQ: "[" >
-    {System.out.println("Corchete izquierdo: "+image);}
+    {System.out.println("corcheteizq ");}
 
     | <CORCHETEDER : "]" >
-    {System.out.println("Corchete derecho: "+image);}
+    {System.out.println("corcheteder");}
+
+    | <USANDO : "using]" >
+    {System.out.println("usando");}
+
     
     | <VARIABLE:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
     {System.out.println("VARIABLE: "+image);}
@@ -179,6 +157,8 @@ void Iniciar() :
 {}
 {
     (<TIPODATO> 
+    |<PUNTOYCOMA>
+    |<NAMESPACE>
     |<HTML_LETRA>
     |<HTML_INTRO>
     |<HTML_STYLES>
@@ -222,6 +202,8 @@ void Iniciar() :
     |<PARENTESISIZQ>
     |<PARENTESISDER>
     |<CORCHETEIZQ>
-    |<CORCHETEDER>)+
+    |<CORCHETEDER>
+    |<USANDO>
+    |<VARIABLE>)+
     <EOF>
 }
