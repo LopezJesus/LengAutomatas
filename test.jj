@@ -38,13 +38,13 @@ TOKEN:
     {System.out.println("Tipodato: "+image);}
     
     | <PUNTOYCOMA: ";">
-    {System.out.println("puntoycoma");}
+    {System.out.println("Puntoycoma");}
 
     | <USANDO : "using" >
-    {System.out.println("usando");}
+    {System.out.println("Usando");}
 
     | <NAMESPACE: "namespace">
-    {System.out.println("namespace");}
+    {System.out.println("Namespace");}
 
     | <HTML_LETRA: "bold"|"italic"|"underscore"|"small"|"del"|"mark"|"strong"|"em"|"i"|"ins"|"sub"|"sup">
     {System.out.println("HTMLtipografia: "+image);}
@@ -116,7 +116,7 @@ TOKEN:
     {System.out.println("Operadores: "+image);}
 
     | <TIPOMETODO: "public" | "private"  | "static" | "protected">
-    {System.out.println("Pilas: "+image);}
+    {System.out.println("Tipometodo: "+image);}
 
     | <MODIFICADORES: "protected" >
     {System.out.println("Modificadores: "+image);}
@@ -134,13 +134,13 @@ TOKEN:
     {System.out.println("Funciones matematicas: "+image);}
 
     | <OBSOUND: "Sound" >
-    {System.out.println("obsound");}
+    {System.out.println("Obsound");}
 
     | <CONDITION: "true" | "false" | "null" | "nullptr" >
     {System.out.println("Condicion: "+image);}
 
     | <EXPREG: "regex" >
-    {System.out.println("Expresion regular: "+image);}
+    {System.out.println("Exreg";}
 
     | <TYPEVARIBLE: "byte" | "char" | "decimal" | "float" | "int" | "double" | "long" | "sbyte" | "string" | "ulong" | "uint" | "intenger" | "bool" | "boolean" >
     {System.out.println("Tipo de variable: "+image);}
@@ -149,7 +149,7 @@ TOKEN:
     {System.out.println("Colecciones: "+image);}
 
     | <MATEMATICAS: "math" >
-    {System.out.println("Matematicas: "+image);}
+    {System.out.println("Matematicas");}
 
     | <RECORRIDA: "<<"|">>" >
     {System.out.println("Recorrida: "+image);}
