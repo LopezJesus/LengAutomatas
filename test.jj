@@ -1,4 +1,36 @@
+PARSER_BEGIN(test)
+class test
+{
+    public static void main ( String[] args) throws ParseException
+    {
+        try
+        {
+            test a = new test (System.in) ; 
+            a.Iniciar();
+            System.out.println("La cadena fue aceptada correctamente");
+        }
+        catch(ParseException e)
+        {
+            System.out.println("Hubo un error ");
+        }
+    }
+}
+PARSER_END(test)
 
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN :
+{
+    <#DIGITO:(["0"-"9"])+>
+    | <#LETRA:["a"-"z","A"-"Z"]>
+    | <#GUIONB:"_">
+}
 
 TOKEN:
 {
@@ -7,6 +39,9 @@ TOKEN:
     
     | <PUNTOYCOMA: ";">
     {System.out.println("puntoycoma");}
+
+    | <USANDO : "using" >
+    {System.out.println("usando");}
 
     | <NAMESPACE: "namespace">
     {System.out.println("namespace");}
@@ -143,12 +178,8 @@ TOKEN:
     | <CORCHETEDER : "]" >
     {System.out.println("corcheteder");}
 
-    | <USANDO : "using]" >
-    {System.out.println("usando");}
-
-    
     | <IDENTIFICADOR:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
-    {System.out.println("identificador: "+image);}
+    {System.out.println("IDENTIFICADOR: "+image);}
 
 
 }
@@ -158,6 +189,7 @@ void Iniciar() :
 {
     (<TIPODATO> 
     |<PUNTOYCOMA>
+    |<USANDO>
     |<NAMESPACE>
     |<HTML_LETRA>
     |<HTML_INTRO>
@@ -203,7 +235,6 @@ void Iniciar() :
     |<PARENTESISDER>
     |<CORCHETEIZQ>
     |<CORCHETEDER>
-    |<USANDO>
     |<IDENTIFICADOR>)+
     <EOF>
 }
