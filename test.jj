@@ -26,11 +26,11 @@ SKIP :
 }
 
 TOKEN :
-    {
+{
     <#DIGITO:(["0"-"9"])+>
-    | <#DECIMAL: <DIGITO>(".")?(<DIGITO>)?>
-    }
-
+    | <#LETRA:["a"-"z","A"-"Z"]>
+    | <#GUIONB:"_">
+}
 
 TOKEN:
 {
@@ -39,15 +39,6 @@ TOKEN:
     
     | <PUNTOYCOMA: ";">
     {System.out.println("puntoycoma");}
-
-    | <NUMERO:("+"|"-")?(<DECIMAL>)+>
-    {System.out.println("NUMERO: "+image);}
-
-    | <PUNTO: ".">
-    {System.out.println("punto");}
-
-    | <IGUAL: "=">
-    {System.out.println("igual");}
 
     | <USANDO : "using" >
     {System.out.println("usando");}
@@ -74,10 +65,16 @@ TOKEN:
     {System.out.println("HTML_hsl");}
     
     | <HTML_IMAGE: "img"|"map"|"area"|"picture">
-    {System.out.println("HTML hsl: "+image);}
+    {System.out.println("HTML_image: "+image);}
     
     | <HTML_TABLE: "table"|"th"|"tr"|"caption"|"colgroup"|"col"|"thead"|"tbody"|"tfoot">
-    {System.out.println("HTML hsl: "+image);}
+    {System.out.println("HTML_table: "+image);}
+    
+    | <HTML_LINK: "href"|"target"|"mailto">
+    {System.out.println("HTML_hsl: "+image);}
+   
+    | <HTML_LINK_ATTRIBUTE: "_self"|"_blank"|"_parent"|"_top">
+    {System.out.println("HTML_hsl: "+image);}
 
     | <ORGANIZACION: "hotmail" | "gmail" >
     {System.out.println("Organizacion: "+image);}
@@ -167,7 +164,7 @@ TOKEN:
     {System.out.println("Información objeto: "+image);}
 
     | <ESTRUCTDATOS: "list" | "vector" | "register" | "stack" | "queue" >
-    {System.out.println("Recorrida: "+image);}
+    {System.out.println("Estructuras: "+image);}
 
     | <LLAVEIZQ: "{" >
     {System.out.println("llaveizq");}
@@ -187,8 +184,9 @@ TOKEN:
     | <CORCHETEDER : "]" >
     {System.out.println("corcheteder");}
 
-    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>    
+    | <IDENTIFICADOR:<LETRA>(<DIGITO>|<LETRA>|<GUIONB>)+>
     {System.out.println("IDENTIFICADOR: "+image);}
+
 
 }
 
@@ -197,9 +195,6 @@ void Iniciar() :
 {
     (<TIPODATO> 
     |<PUNTOYCOMA>
-    |<NUMERO>
-    |<PUNTO>
-    |<IGUAL>
     |<USANDO>
     |<NAMESPACE>
     |<HTML_LETRA>
@@ -210,6 +205,8 @@ void Iniciar() :
     |<HTML_HSL>
     |<HTML_IMAGE>
     |<HTML_TABLE>
+    |<HTML_LINK>
+    |<HTML_LINK_ATTRIBUTE>
     |<ORGANIZACION> 
     |<DOMINIO>
     |<PROTOCOLO>
