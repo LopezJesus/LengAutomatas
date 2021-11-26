@@ -1,18 +1,30 @@
-options {
-	IGNORE_CASE = true;
+PARSER_BEGIN(Sintactico)
+import java.util.*;
+class Sintactico
+{
+    public static void main ( String[] args) throws ParseException
+    {
+        try
+        {
+            Sintactico a = new test (System.in) ; 
+            a.Iniciar();
+            System.out.println("La cadena fue aceptada correctamente");
+        }
+        catch(ParseException e)
+        {
+            System.out.println("Hubo un error ");
+        }
+    }
+
+}
+PARSER_END(test)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
 }
 
-PARSER_BEGIN(SyntaxChecker)
-
-public class SyntaxChecker {
-	public static void main(String[] args) {
-    	try {
-        	new SyntaxChecker(System.in).START();
-        	System.out.println("Gramatica funcional");
-    	} catch (Throwable e) {
-        	System.out.println("Chequeo fallido: " + e.getMessage());
-    	}
-	}
-}
-
-
+TOKEN :
