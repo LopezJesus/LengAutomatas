@@ -35,6 +35,7 @@ TOKEN :
 
 
 TOKEN :
+{
 	<CICLOS : ("for" | "foreach" | "while)>
 	| <PREGUNTA: ("if")>
     | <IMPRIMIR: "cout"| "write" | "writeline">
@@ -53,6 +54,18 @@ TOKEN :
     | <PARENTESISDER: ")" >
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
     | <IGUAL: "=">
+}
+
+void Analizar():
+{
+ <PROGRAMA> <IDENTIFICADOR> Bloque()<EOF>
+
+}
+
+void Bloque():
+{
+ <LLAVEIZQ> instructorFOR() <LLAVEDER>
+}
 
 
 
