@@ -28,3 +28,31 @@ SKIP :
 }
 
 TOKEN :
+{
+    <#DIGITO:(["0"-"9"])+>
+    | <#DECIMAL: <DIGITO>(".")?(<DIGITO>)?>
+}
+
+
+TOKEN :
+	<CICLOS : ("for" | "foreach" | "while)>
+	| <PREGUNTA: ("if")>
+    | <IMPRIMIR: "cout"| "write" | "writeline">
+    | <PUNTOYCOMA: ";">
+    | <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
+    | <OPRELACIONAL: "<=" | ">=" | "==" | "<" | ">"| "!=" >
+    | <OPLOGICO: "&&" | "||" | "!" | "^^" | "~" >
+    | <NUMERO:("+"|"-")?(<DECIMAL>)+>
+    | <RECORRIDA: "<<"|">>" >
+    | <LLAVEIZQ: "{" >
+    | <LLAVEDER: "}" >
+    | <ALEATORIO: "random" | "rand" | "srand" >
+    | <CORCHETEIZQ: "[" >
+    | <CORCHETEDER : "]" >
+    | <PARENTESISIZQ: "(" >
+    | <PARENTESISDER: ")" >
+    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
+    | <IGUAL: "=">
+
+
+
