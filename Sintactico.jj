@@ -1,1 +1,18 @@
+options {
+	IGNORE_CASE = true;
+}
+
+PARSER_BEGIN(SyntaxChecker)
+
+public class SyntaxChecker {
+	public static void main(String[] args) {
+    	try {
+        	new SyntaxChecker(System.in).START();
+        	System.out.println("Gramatica funcional");
+    	} catch (Throwable e) {
+        	System.out.println("Chequeo fallido: " + e.getMessage());
+    	}
+	}
+}
+
 
