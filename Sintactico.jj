@@ -59,12 +59,21 @@ TOKEN :
 void Analizar():
 {
  <PROGRAMA> <IDENTIFICADOR> Bloque()<EOF>
-
 }
 
 void Bloque():
 {
  <LLAVEIZQ> instructorFOR() <LLAVEDER>
+}
+
+void Pregunta():
+{
+ <PARENTESISIZQ> <IDENTIFICADOR> <OPRELACIONAL>  <IDENTIFICADOR> <PARENTESISDER>
+}
+
+void ():
+{
+ <> () <>
 }
 
 
