@@ -1,0 +1,10 @@
+Program main
+{
+	for(int a=0;a<10;a++) 
+	{
+		cout<<(hola) + a;
+
+
+	}
+
+}
