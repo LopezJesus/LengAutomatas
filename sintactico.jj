@@ -1,0 +1,109 @@
+PARSER_BEGIN(sintactico)
+import java.util.*;
+class sintactico
+{
+    public static void main ( String[] args) throws ParseException
+    {
+        try
+        {
+            sintactico a = new sintactico (System.in) ; 
+            a.Analizar();
+            System.out.println("La cadena fue aceptada correctamente");
+        }
+        catch(ParseException e)
+        {
+            System.out.println("Hubo un error ");
+        }
+    }
+
+}
+PARSER_END(sintactico)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN :
+{
+    <#DIGITO:(["0"-"9"])+>
+    | <#DECIMAL: <DIGITO>(".")?(<DIGITO>)?>
+}
+
+
+TOKEN :
+{
+    <CICLOS: ("for" | "foreach" | "while")>
+	| <PROGRAMA: ("Program")>
+	| <PREGUNTA: ("if")>
+    | <IMPRIMIR: "cout"| "write" | "writeline">
+    | <PUNTOYCOMA: ";">
+    | <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
+    | <OPRELACIONAL: "<=" | ">=" | "==" | "<" | ">"| "!=" >
+    | <OPLOGICO: "&&" | "||" | "!" | "^^" | "~" >
+    | <NUMERO:("+"|"-")?(<DECIMAL>)+>
+    | <RECORRIDA: "<<"|">>" >
+    | <LLAVEIZQ: "{" >
+    | <LLAVEDER: "}" >
+    | <ALEATORIO: "random" | "rand" | "srand" >
+    | <CORCHETEIZQ: "[" >
+    | <CORCHETEDER : "]" >
+    | <PARENTESISIZQ: "(" >
+    | <PARENTESISDER: ")" >
+    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
+    | <IGUAL: "=">
+    | <ADICIONSUSTRACCION: "++" | "--" >
+    | <OPERADORES: "+" | "-" | "*" | "/" >
+
+
+}
+
+
+void Analizar(): {}
+{
+	<PROGRAMA> <IDENTIFICADOR> Bloque()<EOF>
+}
+
+void Bloque(): {}
+{
+	<LLAVEIZQ> (instructFOR()|instructIMPRIME()) <LLAVEDER>
+}
+
+void instructFOR(): {}
+{
+	<CICLOS> condicionControl() Bloque()	 	
+}
+
+void condicionControl(): {}
+{
+	<PARENTESISIZQ> asignacion() condicion() incremento() <PARENTESISDER>
+}
+
+void asignacion(): {}
+{
+	<TIPODATO> <IDENTIFICADOR> <IGUAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
+}
+
+void condicion(): {}
+{
+	<IDENTIFICADOR>  <OPRELACIONAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
+}
+
+void incremento(): {}
+{
+	<IDENTIFICADOR> <ADICIONSUSTRACCION>
+}
+
+void instructIMPRIME(): {}
+{
+    <IMPRIMIR> <RECORRIDA> salida()
+}
+
+
+void salida(): {}
+{
+    <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA>
+}
