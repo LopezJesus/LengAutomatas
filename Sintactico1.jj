@@ -78,7 +78,7 @@ Void Incremento():
 
 Void CondicionControl():
 {
-         <PARENTESISIZQ> asignacion() condicion() incremento() <PARENTESISDER>
+         <PARENTESISIZQ> Asignacion() Condicion() Incremento() <PARENTESISDER>
 }
 
 Void Asignacion():
