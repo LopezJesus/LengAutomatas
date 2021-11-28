@@ -66,27 +66,27 @@ void Bloque():
           <LLAVEIZQ> instructorFOR() <LLAVEDER>
 }
 
-void Condicion():
+void condicion():
 {
           <PARENTESISIZQ> <IDENTIFICADOR> <IGUAL>  (<IDENTIFICADOR>|<NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
 }
 
-Void Incremento():
+Void incremento():
 {
          <IDENTIFICADOR> <ADICIONSUSTRACCION>
 }
 
-Void CondicionControl():
+Void condicionControl():
 {
-         <PARENTESISIZQ> Asignacion() Condicion() Incremento() <PARENTESISDER>
+         <PARENTESISIZQ> asignacion() condicion() incremento() <PARENTESISDER>
 }
 
-Void Asignacion():
+Void asignacion():
 {
          <TIPODATO> <IDENTIFICADOR> <IGUAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
 }
 
-Void Aleatorio():
+Void aleatorio():
 {
         <LLAVEIZQ> <IDENTIFICADOR> <CORCHETEDER> <ALEATORIO> <SIGUIENTE> <PARENTESISIZQ> <NÚMERO> <PARENTESISDER> <OPERADORES> <NÚMERO> <PUNTOYCOMA> <LLAVEDER>
 }
