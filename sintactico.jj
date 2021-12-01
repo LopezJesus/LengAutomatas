@@ -48,15 +48,18 @@ TOKEN :
     | <RECORRIDA: "<<"|">>" >
     | <LLAVEIZQ: "{" >
     | <LLAVEDER: "}" >
-    | <ALEATORIO: "random" | "rand" | "srand" >
+    | <ALEATORIO: "random">
     | <CORCHETEIZQ: "[" >
     | <CORCHETEDER : "]" >
     | <PARENTESISIZQ: "(" >
     | <PARENTESISDER: ")" >
-    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
     | <IGUAL: "=">
     | <ADICIONSUSTRACCION: "++" | "--" >
     | <OPERADORES: "+" | "-" | "*" | "/" >
+    | <SIGUIENTE: "Next" >
+    | <SINO: "else">
+    | <PUNTO: "." >
+    | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 
 
 }
@@ -64,17 +67,17 @@ TOKEN :
 
 void Analizar(): {}
 {
-	<PROGRAMA> <IDENTIFICADOR> Bloque()<EOF>
+	<PROGRAMA> <IDENTIFICADOR> <LLAVEIZQ> Bloque() <LLAVEDER> <EOF>
 }
 
 void Bloque(): {}
 {
-	<LLAVEIZQ> (instructFOR()|instructIMPRIME()) <LLAVEDER>
+    ( instructFOR() | instructIMPRIME() | Aleatorio() | instrucPREGUNTA() )*
 }
 
-void instructFOR(): {}
+void instructFOR(): {} //1
 {
-	<CICLOS> condicionControl() Bloque()	 	
+	<CICLOS>  condicionControl() <LLAVEIZQ> Bloque() <LLAVEDER> Bloque()
 }
 
 void condicionControl(): {}
@@ -97,13 +100,28 @@ void incremento(): {}
 	<IDENTIFICADOR> <ADICIONSUSTRACCION>
 }
 
-void instructIMPRIME(): {}
+void instructIMPRIME(): {} //2
 {
     <IMPRIMIR> <RECORRIDA> salida()
 }
-
 
 void salida(): {}
 {
     <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA>
 }
+
+void Aleatorio(): {} //3
+{
+    <IDENTIFICADOR> <CORCHETEIZQ> <IDENTIFICADOR> <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA>
+}
+
+void instrucPREGUNTA(): {} //4
+{
+    <PREGUNTA> condicionIF() <LLAVEIZQ> Bloque() <LLAVEDER> <SINO> <LLAVEIZQ> Bloque() <LLAVEDER> Bloque() 
+}
+
+void condicionIF(): {}
+{
+    <PARENTESISIZQ> <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> 
+}
+
