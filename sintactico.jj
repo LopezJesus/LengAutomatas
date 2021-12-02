@@ -60,6 +60,12 @@ TOKEN :
     | <SINO: "else">
     | <PUNTO: "." >
     | <HACER : "do">
+    | <TIEMPO : "DateTime">
+    | <AHORA: "Now">
+    | <ESTRUCTDATOS: "Stack" | "Queue">
+    | <NUEVO: "new">
+    | <PILAS: "push" | "pop" | "peek" >
+    | <COLAS: "enqueue" | "dequeue" >   
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 }
 
@@ -71,7 +77,7 @@ void Analizar(): {}
 
 void Bloque(): {}
 {
-    ( instructFOR() | instructIMPRIME() | Aleatorio() | instrucPREGUNTA() | instructDOWHILE() | asignacion() )*
+    ( instructFOR() | instructIMPRIME() | Aleatorio() | instrucPREGUNTA() | instructDOWHILE() | asignacion() | creaTiempo() | creaESTRUCTURA() | ponerPILA() | ponerCOLA() )*
 }
 
 void instructFOR(): {} //1
@@ -134,3 +140,22 @@ void condicionWHILE(): {}
     <PARENTESISIZQ> <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER>
 }
 
+void creaTiempo(): {} //7
+{
+    <TIEMPO> <IDENTIFICADOR> <IGUAL> <TIEMPO> <PUNTO> <AHORA> <PUNTOYCOMA> Bloque()
+}
+
+void creaESTRUCTURA(): {} //8
+{
+    <ESTRUCTDATOS> <IDENTIFICADOR> <IGUAL> <NUEVO> <ESTRUCTDATOS> <PARENTESISIZQ> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
+
+void ponerPILA(): {} //9
+{
+    <PILAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
+
+void ponerCOLA(): {} //10
+{
+    <COLAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
