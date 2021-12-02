@@ -59,9 +59,8 @@ TOKEN :
     | <SIGUIENTE: "Next" >
     | <SINO: "else">
     | <PUNTO: "." >
+    | <HACER : "do">
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
-
-
 }
 
 
@@ -72,7 +71,7 @@ void Analizar(): {}
 
 void Bloque(): {}
 {
-    ( instructFOR() | instructIMPRIME() | Aleatorio() | instrucPREGUNTA() )*
+    ( instructFOR() | instructIMPRIME() | Aleatorio() | instrucPREGUNTA() | instructDOWHILE() | asignacion() )*
 }
 
 void instructFOR(): {} //1
@@ -85,7 +84,7 @@ void condicionControl(): {}
 	<PARENTESISIZQ> asignacion() condicion() incremento() <PARENTESISDER>
 }
 
-void asignacion(): {}
+void asignacion(): {} //2
 {
 	<TIPODATO> <IDENTIFICADOR> <IGUAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
 }
@@ -100,22 +99,22 @@ void incremento(): {}
 	<IDENTIFICADOR> <ADICIONSUSTRACCION>
 }
 
-void instructIMPRIME(): {} //2
+void instructIMPRIME(): {} //3
 {
     <IMPRIMIR> <RECORRIDA> salida()
 }
 
 void salida(): {}
 {
-    <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA>
+    <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA> Bloque()
 }
 
-void Aleatorio(): {} //3
+void Aleatorio(): {} //4
 {
-    <IDENTIFICADOR> <CORCHETEIZQ> <IDENTIFICADOR> <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA>
+    <IDENTIFICADOR> <CORCHETEIZQ> <IDENTIFICADOR> <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA> Bloque()
 }
 
-void instrucPREGUNTA(): {} //4
+void instrucPREGUNTA(): {} //5
 {
     <PREGUNTA> condicionIF() <LLAVEIZQ> Bloque() <LLAVEDER> <SINO> <LLAVEIZQ> Bloque() <LLAVEDER> Bloque() 
 }
@@ -123,5 +122,15 @@ void instrucPREGUNTA(): {} //4
 void condicionIF(): {}
 {
     <PARENTESISIZQ> <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> 
+}
+
+void instructDOWHILE(): {} //6
+{
+    <HACER> <LLAVEIZQ> Bloque() <LLAVEDER> <CICLOS> condicionWHILE() Bloque()
+}
+
+void condicionWHILE(): {}
+{
+    <PARENTESISIZQ> <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER>
 }
 
