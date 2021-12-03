@@ -1,10 +1,31 @@
 Program main
 {
+	int be=0;
+	int ab=0;
 	for(int a=0;a<10;a++) 
 	{
-		cout<<(hola) + a;
-
+		Numeros[a] = random.Next(50);
+		cout << (Hola) + a;
 
 	}
+	if(a<b)
+	{
+		cout << (Hola) + a;
+	}
+	else
+	{
+		cout << (Hola) + b;
+	}
+	do
+	{
+		cout << (Hola) + a;
+	}while(be < ab)
+	
+	DateTime localDate = DateTime.Now;
+	Stack miPila = new Stack();
+	push(be);
+	Queue miCola = new Queue();
+	enqueue(ab);
+
 
 }
