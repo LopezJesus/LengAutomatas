@@ -19,6 +19,7 @@ class sintactico
 }
 PARSER_END(sintactico)
 
+
 SKIP :
 {
   " "
@@ -41,7 +42,9 @@ TOKEN :
 	| <PREGUNTA: ("if")>
     | <IMPRIMIR: "cout"| "write" | "writeline">
     | <PUNTOYCOMA: ";">
+    | <DOSPUNTOS: ":">
     | <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
+    | <TIPOACCESO: "public"|"static"|"interal"|"abstract">
     | <OPRELACIONAL: "<=" | ">=" | "==" | "<" | ">"| "!=" >
     | <OPLOGICO: "&&" | "||" | "!" | "^^" | "~" >
     | <NUMERO:("+"|"-")?(<DECIMAL>)+>
@@ -62,22 +65,48 @@ TOKEN :
     | <HACER : "do">
     | <TIEMPO : "DateTime">
     | <AHORA: "Now">
-    | <ESTRUCTDATOS: "Stack" | "Queue">
+    | <ESTRUCTDATOS: "Stack" | "Queue" | "List">
     | <NUEVO: "new">
     | <PILAS: "push" | "pop" | "peek" >
-    | <COLAS: "enqueue" | "dequeue" >   
+    | <COLAS: "enqueue" | "dequeue" >
+    | <ESPACIONOMB: "namespace">
+    | <USANDO: "Using">
+    | <SISTEMA: "System">
+    | <ARCHIVO: "File">
+    | <CREAR: "Create">
+    | <ADDLIST: "Add">
+    | <MATEMATICAS: "Math">
+    | <MAX: "Max">
+    | <MIN: "Min">
+    | <REDONDEAR: "Round">
+    | <COMA: ",">
+    | <CLASE: "class">
+    | <PROCESO: "void">
+    | <COMILLA: "'">
+    | <SWITCH: "switch">
+    | <CASO: "case">
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 }
 
 
 void Analizar(): {}
 {
-	<PROGRAMA> <IDENTIFICADOR> <LLAVEIZQ> Bloque() <LLAVEDER> <EOF>
+	<USANDO> <SISTEMA> <PUNTOYCOMA> <ESPACIONOMB> <IDENTIFICADOR> <LLAVEIZQ> Programa() <LLAVEDER> <EOF>
+}
+
+void Programa(): {}
+{
+    <CLASE> <PROGRAMA> <LLAVEIZQ> Main() <LLAVEDER> 
+}
+
+void Main(): {}
+{
+    <TIPOACCESO> <PROCESO> <IDENTIFICADOR> <PARENTESISIZQ> <PARENTESISDER> <LLAVEIZQ> Bloque() <LLAVEDER> 
 }
 
 void Bloque(): {}
 {
-    ( instructFOR() | instructIMPRIME() | Aleatorio() | instrucPREGUNTA() | instructDOWHILE() | asignacion() | creaTiempo() | creaESTRUCTURA() | ponerPILA() | ponerCOLA() )*
+    ( instructFOR() | Impresiones() | Identifica() | insIF() | instructDOWHILE() | asign() | creaTiempo() | creaESTRUCTURA() | CrearArchivo() | Matematicas() | AltSwitch() | Casos())*
 }
 
 void instructFOR(): {} //1
@@ -87,42 +116,61 @@ void instructFOR(): {} //1
 
 void condicionControl(): {}
 {
-	<PARENTESISIZQ> asignacion() condicion() incremento() <PARENTESISDER>
+	<PARENTESISIZQ> asign() Identifica() Identifica() <PARENTESISDER>
+}
+
+void asign(): {}
+{
+    <TIPODATO> (asignacion() | DeclArray() )
 }
 
 void asignacion(): {} //2
 {
-	<TIPODATO> <IDENTIFICADOR> <IGUAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
+    <IDENTIFICADOR> <IGUAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
 }
 
-void condicion(): {}
+void Identifica(): {} 
 {
-	<IDENTIFICADOR>  <OPRELACIONAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
+    <IDENTIFICADOR> (condicion() | incremento() | Aleatorio() | FuncEstructura() )
+}
+
+void condicion(): {} 
+{
+	<OPRELACIONAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
 }
 
 void incremento(): {}
 {
-	<IDENTIFICADOR> <ADICIONSUSTRACCION>
+	<ADICIONSUSTRACCION>
+}
+void Impresiones(): {}
+{
+    <IMPRIMIR> (instructIMPRIME() | altPRINT() )
 }
 
 void instructIMPRIME(): {} //3
 {
-    <IMPRIMIR> <RECORRIDA> salida()
+    <RECORRIDA> salida()
 }
 
 void salida(): {}
 {
-    <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA> Bloque()
+    <PARENTESISIZQ> (<IDENTIFICADOR>)* <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA> Bloque()
 }
 
 void Aleatorio(): {} //4
 {
-    <IDENTIFICADOR> <CORCHETEIZQ> <IDENTIFICADOR> <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <CORCHETEIZQ> <IDENTIFICADOR> <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
+
+void insIF(): {}
+{
+    <PREGUNTA> (instrucPREGUNTA() | altIF() )
 }
 
 void instrucPREGUNTA(): {} //5
 {
-    <PREGUNTA> condicionIF() <LLAVEIZQ> Bloque() <LLAVEDER> <SINO> <LLAVEIZQ> Bloque() <LLAVEDER> Bloque() 
+    condicionIF() <LLAVEIZQ> Bloque() <LLAVEDER> <SINO> <LLAVEIZQ> Bloque() <LLAVEDER> Bloque() 
 }
 
 void condicionIF(): {}
@@ -150,6 +198,11 @@ void creaESTRUCTURA(): {} //8
     <ESTRUCTDATOS> <IDENTIFICADOR> <IGUAL> <NUEVO> <ESTRUCTDATOS> <PARENTESISIZQ> <PARENTESISDER> <PUNTOYCOMA> Bloque()
 }
 
+void FuncEstructura(): {}
+{
+    <PUNTO> (ponerPILA() | ponerCOLA() | PonerLista() )
+}
+
 void ponerPILA(): {} //9
 {
     <PILAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
@@ -158,4 +211,59 @@ void ponerPILA(): {} //9
 void ponerCOLA(): {} //10
 {
     <COLAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
+
+void DeclArray(): {} //11
+{
+    <CORCHETEIZQ> <CORCHETEDER> <IDENTIFICADOR> <IGUAL> <NUEVO> <TIPODATO> <CORCHETEIZQ> <NUMERO> <CORCHETEDER> <PUNTOYCOMA>
+}
+
+void CrearArchivo(): {} //12
+{
+    <ARCHIVO> <PUNTO> <CREAR> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
+
+void PonerLista(): {} //13
+{
+    <ADDLIST> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+}
+
+void Matematicas(): {}
+{
+    <MATEMATICAS> <PUNTO> (Maximo() | Redondeo() | Minimo() ) Bloque()
+}
+
+void Maximo(): {} //14
+{
+    <MAX> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
+}
+
+void Redondeo(): {} //15
+{
+    <REDONDEAR> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
+}
+
+void Minimo(): {} //16
+{
+    <MIN> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
+}
+
+void altPRINT(): {} //17alt1
+{
+    <COMILLA> (<IDENTIFICADOR>)* <COMILLA> Bloque()
+}
+
+void altIF(): {} //18alt2
+{
+    <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>)  Bloque() <SINO> Bloque()
+}
+
+void AltSwitch(): {} //19alt3
+{
+    <SWITCH> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> Casos() Bloque()
+}
+
+void Casos(): {}
+{
+    <CASO> <IDENTIFICADOR> Bloque()
 }
