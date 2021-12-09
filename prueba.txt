@@ -1,31 +1,64 @@
-Program main
+Using System;
+
+namespace Prueba
 {
-	int be=0;
-	int ab=0;
-	for(int a=0;a<10;a++) 
+	class Program 
 	{
-		Numeros[a] = random.Next(50);
-		cout << (Hola) + a;
+		static void Main()
+		{
+			int be=0;
+			int ab=0;
+			string palabra= beto;
+			DateTime localDate = DateTime.Now;
+			Stack miPila = new Stack();
+			Queue miCola = new Queue();
+			List  miLista = new List(); 
+			int[] notas= new int[10];
 
-	}
-	if(a<b)
-	{
-		cout << (Hola) + a;
-	}
-	else
-	{
-		cout << (Hola) + b;
-	}
-	do
-	{
-		cout << (Hola) + a;
-	}while(be < ab)
-	
-	DateTime localDate = DateTime.Now;
-	Stack miPila = new Stack();
-	push(be);
-	Queue miCola = new Queue();
-	enqueue(ab);
+			File.Create(myPath);
 
+			for(int a=0;a<10;a++) 
+			{
+				Numeros[a] = random.Next(50);
+				cout << (Hola) + a;
 
+			}
+			if(a<b)
+			{
+				cout << (Hola) + a;
+				miPila.push(be);
+				miLista.Add(palabra);				
+			}
+			else
+			{
+				cout << (Hola) + b;
+				miCola.enqueue(ab);
+			}
+			do
+			{
+				cout << (Hola) + a;
+				cout 'Buenas Tardes'
+			}
+			while(be < ab)
+			
+			Math.Max(100, 101);
+			Math.Min(200, 403);
+			Math.Round(250.2);
+
+			if a<b
+				miCola.enqueue(ab);
+			else
+				miCola.enqueue(be);
+			
+			switch(a) 
+				case a
+				miCola.enqueue(Hola);
+
+				case b
+				miCola.enqueue(Buenos);
+				
+				case c
+				miCola.enqueue(Dias);
+		}
+	}
 }
