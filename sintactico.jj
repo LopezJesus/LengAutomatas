@@ -43,7 +43,7 @@ TOKEN :
     | <IMPRIMIR: "cout"| "write" | "writeline">
     | <PUNTOYCOMA: ";">
     | <DOSPUNTOS: ":">
-    | <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var">
+    | <TIPODATO: "int"|"decimal"|"string"|"hexdecimal"|"octal"|"bool"|"var"|"float"|"double">
     | <TIPOACCESO: "public"|"static"|"interal"|"abstract">
     | <OPRELACIONAL: "<=" | ">=" | "==" | "<" | ">"| "!=" >
     | <OPLOGICO: "&&" | "||" | "!" | "^^" | "~" >
@@ -76,8 +76,7 @@ TOKEN :
     | <CREAR: "Create">
     | <ADDLIST: "Add">
     | <MATEMATICAS: "Math">
-    | <MAX: "Max">
-    | <MIN: "Min">
+    | <MAXMIN: "Max"|"Min">
     | <REDONDEAR: "Round">
     | <COMA: ",">
     | <CLASE: "class">
@@ -85,6 +84,15 @@ TOKEN :
     | <COMILLA: "'">
     | <SWITCH: "switch">
     | <CASO: "case">
+    | <PROPIEDADES: "Text" | "Color">
+    | <PARSER: "Parse">
+    | <SELECT: "SELECT">
+    | <DESDE: "FROM">
+    | <HTML_ESTILOS: "styles">
+    | <HTML_LETRA: "bold" | "italic">
+    | <INTENTA: "try">
+    | <ATRAPA: "catch">
+    | <EXCEPCION: "DivideByZero" | "Overflow" >
     | <IDENTIFICADOR : (["A"-"Z","a"-"z","0"-"9","_"])+>
 }
 
@@ -106,32 +114,52 @@ void Main(): {}
 
 void Bloque(): {}
 {
-    ( instructFOR() | Impresiones() | Identifica() | insIF() | instructDOWHILE() | asign() | creaTiempo() | creaESTRUCTURA() | CrearArchivo() | Matematicas() | AltSwitch() | Casos())*
+    ( Ciclos() | Impresiones() | IdentificaPLUS() | insIF() | instructDOWHILE() | asign() | creaTiempo() | creaESTRUCTURA() | CrearArchivo() | Matematicas() | AltSwitch() | Casos() | SQLSelectTODO() | alttryCatch() | altVOID() | altDecMatriz() )*
+}
+
+void Ciclos(): {}
+{
+    <CICLOS> (instructFOR() | CicloDosPuntos() )
 }
 
 void instructFOR(): {} //1
 {
-	<CICLOS>  condicionControl() <LLAVEIZQ> Bloque() <LLAVEDER> Bloque()
+    condicionControl() <LLAVEIZQ> Bloque() <LLAVEDER> 
 }
 
 void condicionControl(): {}
 {
-	<PARENTESISIZQ> asign() Identifica() Identifica() <PARENTESISDER>
+	<PARENTESISIZQ> asign() IdentificaPLUS() IdentificaPLUS() <PARENTESISDER>
 }
 
 void asign(): {}
 {
-    <TIPODATO> (asignacion() | DeclArray() )
+    <TIPODATO> (asignaciones() | Arreglos() )
+}
+
+void asignaciones(): {}
+{
+    <IDENTIFICADOR> <IGUAL> (asignacion() | Parser() )
 }
 
 void asignacion(): {} //2
 {
-    <IDENTIFICADOR> <IGUAL> (<IDENTIFICADOR>|<NUMERO>) <PUNTOYCOMA>
+    (<IDENTIFICADOR> | <NUMERO>) (asignacionPuntoYComa() | Sumas() )
+}
+
+void asignacionPuntoYComa(): {} //2
+{
+    <PUNTOYCOMA>
+}
+
+void IdentificaPLUS(): {} 
+{
+    <IDENTIFICADOR> ( Identifica() | altllamarVOID() )
 }
 
 void Identifica(): {} 
 {
-    <IDENTIFICADOR> (condicion() | incremento() | Aleatorio() | FuncEstructura() )
+    (condicion() | incremento() | AsigaCCorchetes() | FuncEstructura() )
 }
 
 void condicion(): {} 
@@ -145,7 +173,7 @@ void incremento(): {}
 }
 void Impresiones(): {}
 {
-    <IMPRIMIR> (instructIMPRIME() | altPRINT() )
+    <IMPRIMIR> (instructIMPRIME() | altPRINT() | AltIMPRIMIRPROPIEDADES() )
 }
 
 void instructIMPRIME(): {} //3
@@ -155,12 +183,17 @@ void instructIMPRIME(): {} //3
 
 void salida(): {}
 {
-    <PARENTESISIZQ> (<IDENTIFICADOR>)* <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA> Bloque()
+    <PARENTESISIZQ> (<IDENTIFICADOR>)* <PARENTESISDER> <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA> 
+}
+
+void AsigaCCorchetes(): {}
+{
+    <CORCHETEIZQ> (<IDENTIFICADOR> | <NUMERO>) (Aleatorio() | InsertMatriz() )
 }
 
 void Aleatorio(): {} //4
 {
-    <CORCHETEIZQ> <IDENTIFICADOR> <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <CORCHETEDER> <IGUAL> <ALEATORIO> <PUNTO> <SIGUIENTE> <PARENTESISIZQ> <NUMERO> <PARENTESISDER> <PUNTOYCOMA>
 }
 
 void insIF(): {}
@@ -170,7 +203,7 @@ void insIF(): {}
 
 void instrucPREGUNTA(): {} //5
 {
-    condicionIF() <LLAVEIZQ> Bloque() <LLAVEDER> <SINO> <LLAVEIZQ> Bloque() <LLAVEDER> Bloque() 
+    condicionIF() <LLAVEIZQ> Bloque() <LLAVEDER> <SINO> <LLAVEIZQ> Bloque() <LLAVEDER> 
 }
 
 void condicionIF(): {}
@@ -180,7 +213,7 @@ void condicionIF(): {}
 
 void instructDOWHILE(): {} //6
 {
-    <HACER> <LLAVEIZQ> Bloque() <LLAVEDER> <CICLOS> condicionWHILE() Bloque()
+    <HACER> <LLAVEIZQ> Bloque() <LLAVEDER> <CICLOS> condicionWHILE()
 }
 
 void condicionWHILE(): {}
@@ -190,12 +223,12 @@ void condicionWHILE(): {}
 
 void creaTiempo(): {} //7
 {
-    <TIEMPO> <IDENTIFICADOR> <IGUAL> <TIEMPO> <PUNTO> <AHORA> <PUNTOYCOMA> Bloque()
+    <TIEMPO> <IDENTIFICADOR> <IGUAL> <TIEMPO> <PUNTO> <AHORA> <PUNTOYCOMA>
 }
 
 void creaESTRUCTURA(): {} //8
 {
-    <ESTRUCTDATOS> <IDENTIFICADOR> <IGUAL> <NUEVO> <ESTRUCTDATOS> <PARENTESISIZQ> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <ESTRUCTDATOS> <IDENTIFICADOR> <IGUAL> <NUEVO> <ESTRUCTDATOS> <PARENTESISIZQ> <PARENTESISDER> <PUNTOYCOMA> 
 }
 
 void FuncEstructura(): {}
@@ -205,37 +238,42 @@ void FuncEstructura(): {}
 
 void ponerPILA(): {} //9
 {
-    <PILAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <PILAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA>
 }
 
 void ponerCOLA(): {} //10
 {
-    <COLAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <COLAS> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> 
+}
+
+void Arreglos(): {}
+{
+    <CORCHETEIZQ> ( DeclArray() | DecMatriz() )
 }
 
 void DeclArray(): {} //11
 {
-    <CORCHETEIZQ> <CORCHETEDER> <IDENTIFICADOR> <IGUAL> <NUEVO> <TIPODATO> <CORCHETEIZQ> <NUMERO> <CORCHETEDER> <PUNTOYCOMA>
+    <CORCHETEDER> <IDENTIFICADOR> <IGUAL> <NUEVO> <TIPODATO> <CORCHETEIZQ> <NUMERO> <CORCHETEDER> <PUNTOYCOMA>
 }
 
 void CrearArchivo(): {} //12
 {
-    <ARCHIVO> <PUNTO> <CREAR> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <ARCHIVO> <PUNTO> <CREAR> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA>
 }
 
 void PonerLista(): {} //13
 {
-    <ADDLIST> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA> Bloque()
+    <ADDLIST> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> <PUNTOYCOMA>
 }
 
 void Matematicas(): {}
 {
-    <MATEMATICAS> <PUNTO> (Maximo() | Redondeo() | Minimo() ) Bloque()
+    <MATEMATICAS> <PUNTO> (MaximoYMinimo() | Redondeo() )
 }
 
-void Maximo(): {} //14
+void MaximoYMinimo(): {} //14
 {
-    <MAX> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
+    <MAXMIN> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
 }
 
 void Redondeo(): {} //15
@@ -243,27 +281,102 @@ void Redondeo(): {} //15
     <REDONDEAR> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
 }
 
-void Minimo(): {} //16
+void Sumas(): {} //16
 {
-    <MIN> <PARENTESISIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <PARENTESISDER> <PUNTOYCOMA>
-}
-
-void altPRINT(): {} //17alt1
-{
-    <COMILLA> (<IDENTIFICADOR>)* <COMILLA> Bloque()
-}
-
-void altIF(): {} //18alt2
-{
-    <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>)  Bloque() <SINO> Bloque()
-}
-
-void AltSwitch(): {} //19alt3
-{
-    <SWITCH> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> Casos() Bloque()
+    <OPERADORES> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA>
 }
 
 void Casos(): {}
 {
-    <CASO> <IDENTIFICADOR> Bloque()
+    <CASO> <IDENTIFICADOR>
+}
+
+void DecMatriz(): {} //17
+{
+    <COMA> <CORCHETEDER> <IDENTIFICADOR> <IGUAL> <NUEVO> <TIPODATO> <CORCHETEIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <CORCHETEDER> <PUNTOYCOMA> 
+}
+
+void InsertMatriz(): {} //18
+{
+    <COMA> (<IDENTIFICADOR> | <NUMERO>) <CORCHETEDER> <IGUAL> (<IDENTIFICADOR> | <NUMERO>) <PUNTOYCOMA> 
+}
+
+void Parser(): {} //19
+{
+    <TIPODATO> <PUNTO> <PARSER> <PARENTESISIZQ> <IDENTIFICADOR> <PUNTO> <PROPIEDADES> <PARENTESISDER> <PUNTOYCOMA>
+}
+
+void SQLSelectTODO(): {} //20
+{
+    <SELECT> <OPERADORES> <DESDE> <IDENTIFICADOR> 
+}
+
+void altPRINT(): {} //21alt1
+{
+    <COMILLA> (<IDENTIFICADOR>)* <COMILLA> 
+}
+
+void altIF(): {} //22alt2
+{
+    <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>)  Bloque() <SINO> Bloque()
+}
+
+void AltSwitch(): {} //23alt3
+{
+    <SWITCH> <PARENTESISIZQ> <IDENTIFICADOR> <PARENTESISDER> Casos() 
+}
+
+void CicloDosPuntos(): {}
+{
+    <DOSPUNTOS> (AltDoWhile() | altFRCH() )
+}
+
+void AltDoWhile(): {} //24alt4
+{
+    <IDENTIFICADOR> <OPRELACIONAL> (<IDENTIFICADOR> | <NUMERO>) <HACER> Bloque()
+}
+
+void AltIMPRIMIRPROPIEDADES(): {} //25alt5
+{
+    estilo() <RECORRIDA> <COMILLA> (<IDENTIFICADOR>)* <COMILLA>
+}
+
+void estilo(): {} 
+{
+    <DOSPUNTOS> <HTML_ESTILOS> <PUNTO> <HTML_LETRA>
+}
+
+void altFRCH(): {} //26alt6
+{
+    <TIPODATO> <IDENTIFICADOR> <RECORRIDA> <IDENTIFICADOR> Bloque() 
+}
+
+void alttryCatch(): {} //27alt7
+{
+    <INTENTA> Bloque() <ATRAPA> <RECORRIDA> <EXCEPCION>
+}
+
+void altVOID(): {} //28alt8
+{
+    <TIPOACCESO> <PROCESO> <IDENTIFICADOR> <RECORRIDA> VariablesDec() Bloque()
+}
+
+void VariablesDec(): {}
+{
+    (<TIPODATO> <IDENTIFICADOR>)*
+}
+
+void altllamarVOID(): {} //29alt9
+{
+    <RECORRIDA> Variables()
+}
+
+void Variables(): {}
+{
+    (<IDENTIFICADOR>)*
+}
+
+void altDecMatriz(): {} //30alt10
+{
+    <CORCHETEIZQ> (<IDENTIFICADOR> | <NUMERO>) <COMA> (<IDENTIFICADOR> | <NUMERO>) <CORCHETEDER> <TIPODATO> <IDENTIFICADOR>
 }
