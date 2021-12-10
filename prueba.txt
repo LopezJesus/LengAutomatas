@@ -14,6 +14,7 @@ namespace Prueba
 			Queue miCola = new Queue();
 			List  miLista = new List(); 
 			int[] notas= new int[10];
+			float[,] matrix= new float [a,2];
 
 			File.Create(myPath);
 
@@ -21,18 +22,20 @@ namespace Prueba
 			{
 				Numeros[a] = random.Next(50);
 				cout << (Hola) + a;
-
+				matrix[1,1]=25;
 			}
 			if(a<b)
 			{
 				cout << (Hola) + a;
 				miPila.push(be);
-				miLista.Add(palabra);				
+				miLista.Add(palabra);
+				int ab = 100 + be;				
 			}
 			else
 			{
 				cout << (Hola) + b;
 				miCola.enqueue(ab);
+				var Dinero = double.Parse(altura.Text);
 			}
 			do
 			{
@@ -57,8 +60,32 @@ namespace Prueba
 				case b
 				miCola.enqueue(Buenos);
 				
+
 				case c
 				miCola.enqueue(Dias);
+			SELECT * FROM MyDataBase
+
+			while: a <= 100 do
+				miCola.enqueue(Dias);
+				write:styles.italic << 'Hola mundo'
+			
+			try
+			foreach: int nota >> notas
+				cout << (Las notas son) + nota;
+				ProcesoSaludo>> a b c			
+			catch >> DivideByZero
+
+			public void ProcesoSaludo >> int a int b int c
+				case a
+				miCola.enqueue(Hola);
+
+				case b
+				miCola.enqueue(Buenos);
+				
+				case c
+				miCola.enqueue(Dias);
+
+			[3,3] Float Matriz
 		}
 	}
 }
